@@ -497,7 +497,7 @@ export default function Portfolio() {
             <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
               {[
                 { label: "Email", value: "fernandomps.21@uom.lk", href: "mailto:fernandomps.21@uom.lk" },
-                { label: "Phone", value: "(+94) 74 042 7745", href: "tel:+94740427745" },
+                { label: "Phone", value: "(+94) 74 042 7745", href: "tel:+94706747745" },
                 { label: "LinkedIn", value: "prameshfernando", href: "https://linkedin.com/in/prameshfernando" },
                 { label: "Location", value: "Panadura, Sri Lanka", href: null },
               ].map(c => (
