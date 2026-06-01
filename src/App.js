@@ -12,7 +12,7 @@ const useInView = (threshold = 0.15) => {
     const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setInView(true); }, { threshold });
     if (ref.current) obs.observe(ref.current);
     return () => obs.disconnect();
-  }, []);
+  }, [threshold]);
   return [ref, inView];
 };
 
@@ -159,7 +159,7 @@ const ContactForm = ({ styles }) => {
     <FadeIn direction="left" delay={0.2}>
       <div style={{ ...styles.card, padding: "40px" }}>
         <div style={{ fontSize: "13px", color: "#64748b", fontFamily: "'JetBrains Mono', monospace", marginBottom: "24px" }}>
-          // send a message
+          {/* send a message */}
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
           <input
@@ -236,7 +236,7 @@ export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("home");
   const [scrollY, setScrollY] = useState(0);
   const [typedText, setTypedText] = useState("");
-  const roles = ["Software Engineer", "Full-Stack Developer", "Mobile App Developer", "IT Undergraduate"];
+  const roles = useRef(["Software Engineer", "Full-Stack Developer", "Mobile App Developer", "IT Undergraduate"]);
   const roleRef = useRef(0);
   const charRef = useRef(0);
   const deletingRef = useRef(false);
@@ -258,7 +258,7 @@ export default function Portfolio() {
 
   useEffect(() => {
     const type = () => {
-      const role = roles[roleRef.current];
+      const role = roles.current[roleRef.current];
       if (!deletingRef.current) {
         if (charRef.current < role.length) {
           setTypedText(role.slice(0, ++charRef.current));
@@ -273,7 +273,7 @@ export default function Portfolio() {
           setTimeout(type, 40);
         } else {
           deletingRef.current = false;
-          roleRef.current = (roleRef.current + 1) % roles.length;
+          roleRef.current = (roleRef.current + 1) % roles.current.length;
           setTimeout(type, 300);
         }
       }
