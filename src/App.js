@@ -139,7 +139,7 @@ const projects = [
 ];
 
 const achievements = [
-  { title: "Chathurmana", role: "Finalist", org: "University of Jayawardhanapura" },
+  { title: "Chathurmana", role: "Finalist", org: "University of Sri Jayewardenepura" },
   { title: "HackMoral 2024", role: "Participant", org: "University of Moratuwa" },
   { title: "Duothan 3.0 2023", role: "Participant", org: "NSBM" },
   { title: "Code Rush 2023", role: "Participant", org: "INTECS" },
