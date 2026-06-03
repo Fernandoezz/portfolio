@@ -12,7 +12,7 @@ const useInView = (threshold = 0.15) => {
     const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setInView(true); }, { threshold });
     if (ref.current) obs.observe(ref.current);
     return () => obs.disconnect();
-  }, []);
+  }, [threshold]);
   return [ref, inView];
 };
 
@@ -27,6 +27,12 @@ const FadeIn = ({ children, delay = 0, direction = "up", className = "" }) => {
     }}>{children}</div>
   );
 };
+
+const GitHubIcon = () => (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+  </svg>
+);
 
 const skills = {
   "Languages": ["Python", "Java", "C", "JavaScript", "TypeScript"],
@@ -83,13 +89,13 @@ const projects = [
     repo: null
   },
   {
-    title: "On-Demand Auto Care Platform",
+    title: "RideResQ — Auto Care Platform",
     tag: "Mobile · Ongoing",
     desc: "Location-based vehicle service booking app with scalable Spring Boot backend and real-time service requests.",
     stack: ["React Native", "Spring Boot"],
     status: "Ongoing",
     color: "#f59e0b",
-    repo: null
+    repo: "https://github.com/Fernandoezz/RideResQ"
   },
   {
     title: "Spotify Clone",
@@ -98,7 +104,7 @@ const projects = [
     stack: ["React Native", "Spring Boot"],
     status: "Ongoing",
     color: "#f59e0b",
-    repo: null
+    repo: "https://github.com/Fernandoezz/Spotify_clone"
   },
   {
     title: "Online Shopping Platform",
@@ -135,12 +141,6 @@ const achievements = [
   { title: "Duothan 3.0 2023", role: "Participant", org: "NSBM" },
   { title: "Code Rush 2023", role: "Participant", org: "INTECS" },
 ];
-
-const GitHubIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
-  </svg>
-);
 
 const NavLink = ({ href, children, active, onClick }) => (
   <a href={href} onClick={onClick} style={{
@@ -180,7 +180,7 @@ const ProjectCard = ({ p, styles }) => {
       {/* top accent line */}
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "2px", background: `linear-gradient(90deg, ${p.color}, transparent)` }} />
 
-      {/* header row */}
+      {/* header */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "12px", gap: "8px" }}>
         <div style={{ fontSize: "16px", fontWeight: 700, color: "#f1f5f9", lineHeight: 1.3 }}>{p.title}</div>
         <span style={{ ...styles.tag, background: sc.bg, color: sc.color, whiteSpace: "nowrap", flexShrink: 0 }}>{p.status}</span>
@@ -192,8 +192,8 @@ const ProjectCard = ({ p, styles }) => {
       {/* description */}
       <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "14px", lineHeight: 1.75, flex: 1, marginBottom: "20px" }}>{p.desc}</p>
 
-      {/* tech stack */}
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: p.repo ? "20px" : "0" }}>
+      {/* stack chips */}
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: p.repo ? "16px" : "0" }}>
         {p.stack.map(s => (
           <span key={s} style={{ padding: "3px 10px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "4px", fontSize: "11px", color: "#94a3b8", fontFamily: "'JetBrains Mono', monospace" }}>{s}</span>
         ))}
@@ -205,20 +205,29 @@ const ProjectCard = ({ p, styles }) => {
           href={p.repo}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={e => e.stopPropagation()}
           style={{
-            display: "inline-flex", alignItems: "center", gap: "8px",
-            padding: "8px 16px",
+            display: "inline-flex", alignItems: "center", gap: "7px",
+            padding: "8px 14px",
             background: "rgba(255,255,255,0.04)",
             border: "1px solid rgba(255,255,255,0.1)",
             borderRadius: "8px",
             color: "#e2e8f0",
-            fontSize: "13px", fontWeight: 500,
+            fontSize: "12px", fontWeight: 500,
             textDecoration: "none",
             transition: "background 0.2s, border-color 0.2s, color 0.2s",
             alignSelf: "flex-start",
           }}
-          onMouseEnter={e => { e.currentTarget.style.background = "rgba(34,211,165,0.08)"; e.currentTarget.style.borderColor = "rgba(34,211,165,0.4)"; e.currentTarget.style.color = "#22d3a5"; }}
-          onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.04)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; e.currentTarget.style.color = "#e2e8f0"; }}
+          onMouseEnter={e => {
+            e.currentTarget.style.background = "rgba(34,211,165,0.08)";
+            e.currentTarget.style.borderColor = "rgba(34,211,165,0.4)";
+            e.currentTarget.style.color = "#22d3a5";
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.background = "rgba(255,255,255,0.04)";
+            e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
+            e.currentTarget.style.color = "#e2e8f0";
+          }}
         >
           <GitHubIcon /> View on GitHub
         </a>
@@ -234,13 +243,18 @@ const ContactForm = ({ styles }) => {
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = async () => {
-    if (!form.name || !form.email || !form.message) { setStatus("empty"); return; }
+    if (!form.name || !form.email || !form.message) {
+      setStatus("empty");
+      return;
+    }
     setStatus("sending");
     try {
-      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-        from_name: form.name, from_email: form.email,
-        message: form.message, to_name: "Pramesh",
-      }, EMAILJS_PUBLIC_KEY);
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        { from_name: form.name, from_email: form.email, message: form.message, to_name: "Pramesh" },
+        EMAILJS_PUBLIC_KEY
+      );
       setStatus("success");
       setForm({ name: "", email: "", message: "" });
     } catch (err) {
@@ -259,7 +273,9 @@ const ContactForm = ({ styles }) => {
   return (
     <FadeIn direction="left" delay={0.2}>
       <div style={{ ...styles.card, padding: "40px" }}>
-        <div style={{ fontSize: "13px", color: "#64748b", fontFamily: "'JetBrains Mono', monospace", marginBottom: "24px" }}>// send a message</div>
+        <div style={{ fontSize: "13px", color: "#64748b", fontFamily: "'JetBrains Mono', monospace", marginBottom: "24px" }}>
+          // send a message
+        </div>
         <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
           <input name="name" placeholder="Name" value={form.name} onChange={handleChange} style={inputStyle}
             onFocus={e => e.target.style.borderColor = "rgba(34,211,165,0.5)"}
@@ -271,6 +287,7 @@ const ContactForm = ({ styles }) => {
             style={{ ...inputStyle, resize: "vertical" }}
             onFocus={e => e.target.style.borderColor = "rgba(34,211,165,0.5)"}
             onBlur={e => e.target.style.borderColor = "rgba(255,255,255,0.1)"} />
+
           {status === "success" && (
             <div style={{ padding: "12px 16px", background: "rgba(34,211,165,0.1)", border: "1px solid rgba(34,211,165,0.25)", borderRadius: "8px", color: "#22d3a5", fontSize: "14px" }}>
               ✓ Message sent! I'll get back to you soon.
@@ -286,8 +303,13 @@ const ContactForm = ({ styles }) => {
               ✕ Something went wrong. Try emailing me directly at fernandomps.21@uom.lk
             </div>
           )}
+
           <button onClick={handleSubmit} disabled={status === "sending"}
-            style={{ padding: "13px 24px", background: status === "sending" ? "rgba(34,211,165,0.5)" : "#22d3a5", color: "#080c14", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: 700, cursor: status === "sending" ? "not-allowed" : "pointer", transition: "transform 0.2s, box-shadow 0.2s" }}
+            style={{
+              padding: "13px 24px", background: status === "sending" ? "rgba(34,211,165,0.5)" : "#22d3a5",
+              color: "#080c14", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: 700,
+              cursor: status === "sending" ? "not-allowed" : "pointer", transition: "transform 0.2s, box-shadow 0.2s",
+            }}
             onMouseEnter={e => { if (status !== "sending") { e.target.style.transform = "translateY(-2px)"; e.target.style.boxShadow = "0 8px 24px rgba(34,211,165,0.3)"; }}}
             onMouseLeave={e => { e.target.style.transform = "none"; e.target.style.boxShadow = "none"; }}>
             {status === "sending" ? "Sending..." : "Send Message →"}
@@ -302,7 +324,7 @@ export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("home");
   const [scrollY, setScrollY] = useState(0);
   const [typedText, setTypedText] = useState("");
-  const roles = ["Software Engineer", "Full-Stack Developer", "Mobile App Developer", "IT Undergraduate"];
+  const roles = useRef(["Software Engineer", "Full-Stack Developer", "Mobile App Developer", "IT Undergraduate"]);
   const roleRef = useRef(0);
   const charRef = useRef(0);
   const deletingRef = useRef(false);
@@ -324,7 +346,7 @@ export default function Portfolio() {
 
   useEffect(() => {
     const type = () => {
-      const role = roles[roleRef.current];
+      const role = roles.current[roleRef.current];
       if (!deletingRef.current) {
         if (charRef.current < role.length) {
           setTypedText(role.slice(0, ++charRef.current));
@@ -339,7 +361,7 @@ export default function Portfolio() {
           setTimeout(type, 40);
         } else {
           deletingRef.current = false;
-          roleRef.current = (roleRef.current + 1) % roles.length;
+          roleRef.current = (roleRef.current + 1) % roles.current.length;
           setTimeout(type, 300);
         }
       }
@@ -348,7 +370,9 @@ export default function Portfolio() {
     return () => clearTimeout(t);
   }, []);
 
-  const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  const scrollTo = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
 
   const navLinks = [
     { id: "home", label: "Home" }, { id: "about", label: "About" },
@@ -359,7 +383,7 @@ export default function Portfolio() {
   const styles = {
     root: { background: "#080c14", color: "#e2e8f0", fontFamily: "'DM Sans', 'Segoe UI', sans-serif", minHeight: "100vh", overflowX: "hidden" },
     nav: { position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: scrollY > 60 ? "rgba(8,12,20,0.95)" : "transparent", borderBottom: scrollY > 60 ? "1px solid rgba(34,211,165,0.1)" : "1px solid transparent", backdropFilter: scrollY > 60 ? "blur(16px)" : "none", transition: "all 0.4s ease", padding: "18px 40px", display: "flex", alignItems: "center", justifyContent: "space-between" },
-    logo: { fontFamily: "'Space Grotesk', monospace", fontSize: "20px", fontWeight: 700, color: "#22d3a5", letterSpacing: "-0.02em" },
+    logo: { fontFamily: "'Space Grotesk', monospace", fontSize: "20px", fontWeight: 700, color: "#22d3a5", letterSpacing: "-0.02em", textDecoration: "none" },
     navLinks: { display: "flex", gap: "36px", alignItems: "center" },
     hero: { minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "120px 40px 80px", position: "relative", overflow: "hidden" },
     heroGrid: { position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(34,211,165,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(34,211,165,0.04) 1px, transparent 1px)", backgroundSize: "60px 60px", pointerEvents: "none" },
@@ -394,9 +418,12 @@ export default function Portfolio() {
         <div style={styles.heroGrid} />
         <div style={styles.heroGlow} />
         <div style={{ maxWidth: "1100px", margin: "0 auto", width: "100%" }}>
-          <div style={{ fontFamily: "'JetBrains Mono', monospace", color: "#22d3a5", fontSize: "14px", marginBottom: "20px", opacity: 0.8, animation: "fadeInUp 0.6s ease 0.2s both" }}>{"// hello, world"}</div>
+          <div style={{ fontFamily: "'JetBrains Mono', monospace", color: "#22d3a5", fontSize: "14px", marginBottom: "20px", opacity: 0.8, animation: "fadeInUp 0.6s ease 0.2s both" }}>
+            {"// hello, world"}
+          </div>
           <h1 style={{ fontSize: "clamp(48px, 8vw, 88px)", fontWeight: 700, lineHeight: 1.0, margin: "0 0 16px", color: "#f1f5f9", fontFamily: "'Space Grotesk', sans-serif", animation: "fadeInUp 0.6s ease 0.4s both" }}>
-            Pramesh<br /><span style={{ color: "#22d3a5" }}>Fernando</span>
+            Pramesh<br />
+            <span style={{ color: "#22d3a5" }}>Fernando</span>
           </h1>
           <div style={{ fontSize: "clamp(18px, 3vw, 26px)", color: "rgba(255,255,255,0.5)", fontWeight: 400, marginBottom: "40px", minHeight: "40px", animation: "fadeInUp 0.6s ease 0.6s both" }}>
             <span style={{ color: "#94a3b8" }}>{typedText}</span>
@@ -406,14 +433,12 @@ export default function Portfolio() {
             IT undergraduate at University of Moratuwa building modern web & mobile applications. Passionate about clean code, scalable architecture, and great user experiences.
           </p>
           <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", animation: "fadeInUp 0.6s ease 1s both" }}>
-            <button onClick={() => scrollTo("projects")}
-              style={{ padding: "14px 32px", background: "#22d3a5", color: "#080c14", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: 700, cursor: "pointer", transition: "transform 0.2s, box-shadow 0.2s", boxShadow: "0 0 24px rgba(34,211,165,0.25)" }}
+            <button onClick={() => scrollTo("projects")} style={{ padding: "14px 32px", background: "#22d3a5", color: "#080c14", border: "none", borderRadius: "8px", fontSize: "14px", fontWeight: 700, cursor: "pointer", letterSpacing: "0.02em", transition: "transform 0.2s, box-shadow 0.2s", boxShadow: "0 0 24px rgba(34,211,165,0.25)" }}
               onMouseEnter={e => { e.target.style.transform = "translateY(-2px)"; e.target.style.boxShadow = "0 8px 32px rgba(34,211,165,0.35)"; }}
               onMouseLeave={e => { e.target.style.transform = "none"; e.target.style.boxShadow = "0 0 24px rgba(34,211,165,0.25)"; }}>
               View Projects
             </button>
-            <button onClick={() => scrollTo("contact")}
-              style={{ padding: "14px 32px", background: "transparent", color: "#22d3a5", border: "1px solid rgba(34,211,165,0.4)", borderRadius: "8px", fontSize: "14px", fontWeight: 600, cursor: "pointer", transition: "border-color 0.2s, background 0.2s" }}
+            <button onClick={() => scrollTo("contact")} style={{ padding: "14px 32px", background: "transparent", color: "#22d3a5", border: "1px solid rgba(34,211,165,0.4)", borderRadius: "8px", fontSize: "14px", fontWeight: 600, cursor: "pointer", transition: "border-color 0.2s, background 0.2s" }}
               onMouseEnter={e => { e.target.style.background = "rgba(34,211,165,0.05)"; e.target.style.borderColor = "#22d3a5"; }}
               onMouseLeave={e => { e.target.style.background = "transparent"; e.target.style.borderColor = "rgba(34,211,165,0.4)"; }}>
               Get in Touch
@@ -439,7 +464,7 @@ export default function Portfolio() {
               Ambitious IT undergraduate at <span style={{ color: "#e2e8f0", fontWeight: 600 }}>University of Moratuwa</span>, expected to graduate in 2026. I specialize in building full-stack web and mobile applications that solve real-world problems.
             </p>
             <p style={{ color: "rgba(255,255,255,0.55)", lineHeight: 1.9, fontSize: "15px" }}>
-              I thrive in fast-paced environments and bring strong problem-solving abilities, an eye for detail, and a passion for delivering production-quality software.
+              I thrive in fast-paced environments and bring strong problem-solving abilities, an eye for detail, and a passion for delivering production-quality software. Currently building an on-demand auto-care platform and a Spotify clone.
             </p>
           </FadeIn>
           <FadeIn direction="left" delay={0.2}>
@@ -545,7 +570,7 @@ export default function Portfolio() {
             <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
               {[
                 { label: "Email", value: "fernandomps.21@uom.lk", href: "mailto:fernandomps.21@uom.lk" },
-                { label: "Phone", value: "(+94) 74 042 7745", href: "tel:+94740427745" },
+                { label: "Phone", value: "(+94) 70 674 7745", href: "tel:+94706747745" },
                 { label: "LinkedIn", value: "prameshfernando", href: "https://linkedin.com/in/prameshfernando" },
                 { label: "Location", value: "Panadura, Sri Lanka", href: null },
               ].map(c => (
@@ -554,7 +579,9 @@ export default function Portfolio() {
                   {c.href ? (
                     <a href={c.href} style={{ color: "#e2e8f0", fontSize: "15px", textDecoration: "none", transition: "color 0.2s" }}
                       onMouseEnter={e => e.target.style.color = "#22d3a5"}
-                      onMouseLeave={e => e.target.style.color = "#e2e8f0"}>{c.value}</a>
+                      onMouseLeave={e => e.target.style.color = "#e2e8f0"}>
+                      {c.value}
+                    </a>
                   ) : (
                     <span style={{ color: "#e2e8f0", fontSize: "15px" }}>{c.value}</span>
                   )}
@@ -562,6 +589,7 @@ export default function Portfolio() {
               ))}
             </div>
           </FadeIn>
+
           <ContactForm styles={styles} />
         </div>
       </section>
