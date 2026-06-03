@@ -1208,7 +1208,7 @@ export default function Portfolio() {
         }}
       >
         <FadeIn>
-          <div style={styles.sectionLabel}>02 — Skills</div>
+          <div style={styles.sectionLabel}>03 — Skills</div>
           <div style={styles.divider} />
           <h2 style={styles.sectionTitle}>
             Technical
@@ -1270,7 +1270,7 @@ export default function Portfolio() {
         }}
       >
         <FadeIn>
-          <div style={styles.sectionLabel}>03 — Projects</div>
+          <div style={styles.sectionLabel}>04 — Projects</div>
           <div style={styles.divider} />
           <h2 style={styles.sectionTitle}>
             What I've
@@ -1302,7 +1302,7 @@ export default function Portfolio() {
         }}
       >
         <FadeIn>
-          <div style={styles.sectionLabel}>04 — Recognition</div>
+          <div style={styles.sectionLabel}>05 — Recognition</div>
           <div style={styles.divider} />
           <h2 style={styles.sectionTitle}>
             Achievements &<br />
@@ -1399,7 +1399,7 @@ export default function Portfolio() {
         }}
       >
         <FadeIn>
-          <div style={styles.sectionLabel}>05 — Contact</div>
+          <div style={styles.sectionLabel}>06 — Contact</div>
           <div style={styles.divider} />
         </FadeIn>
         <div
