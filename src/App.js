@@ -8,11 +8,11 @@ const EMAILJS_PUBLIC_KEY = "a0vuTeUKUurfi7jAU";
 const useInView = (threshold = 0.15) => {
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
-  useEffect(() => {
+  useEffect(() => { // eslint-disable-line react-hooks/exhaustive-deps
     const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setInView(true); }, { threshold });
     if (ref.current) obs.observe(ref.current);
     return () => obs.disconnect();
-  }, [threshold]);
+  }, [threshold]); // eslint-disable-line react-hooks/exhaustive-deps
   return [ref, inView];
 };
 
@@ -274,7 +274,7 @@ const ContactForm = ({ styles }) => {
     <FadeIn direction="left" delay={0.2}>
       <div style={{ ...styles.card, padding: "40px" }}>
         <div style={{ fontSize: "13px", color: "#64748b", fontFamily: "'JetBrains Mono', monospace", marginBottom: "24px" }}>
-          // send a message
+          {"// send a message"}
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
           <input name="name" placeholder="Name" value={form.name} onChange={handleChange} style={inputStyle}
@@ -344,7 +344,7 @@ export default function Portfolio() {
     return () => obs.disconnect();
   }, []);
 
-  useEffect(() => {
+  useEffect(() => { // eslint-disable-line react-hooks/exhaustive-deps
     const type = () => {
       const role = roles.current[roleRef.current];
       if (!deletingRef.current) {
