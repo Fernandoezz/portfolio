@@ -35,11 +35,14 @@ const GitHubIcon = () => (
 );
 
 const skills = {
-  "Languages": ["Python", "Java", "C", "JavaScript", "TypeScript"],
-  "Frontend": ["React.js", "React Native", "Flutter", "Angular", "HTML/CSS/SCSS"],
-  "Backend": ["Node.js", "Spring Boot", "Electron.js"],
-  "Databases": ["MySQL", "PostgreSQL", "MongoDB", "SQLite"],
-  "Tools": ["Git", "Docker", "Postman", "Figma", "Blender", "Jira", "Asana"],
+  "Languages": ["Python", "Java", "C", "JavaScript"],
+  "Frontend": ["HTML", "CSS", "React.js"],
+  "Mobile": ["Flutter", "React Native"],
+  "Backend": ["Node.js", "Spring Boot"],
+  "Databases": ["MySQL", "PostgreSQL", "MongoDB"],
+  "Cloud & Services": ["Firebase", "Cloudinary"],
+  "Auth & Security": ["Keycloak"],
+  "Tools & Platforms": ["Git", "Postman", "VMware", "Figma", "Blender", "Jira", "Asana"],
 };
 
 const projects = [
